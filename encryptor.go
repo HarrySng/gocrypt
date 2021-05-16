@@ -20,9 +20,16 @@ import (
 )
 
 func main() {
-	fileName := os.Args[1] // First CLI argument
+	fileName := os.Args[1]              // First CLI argument
 	extension := filepath.Ext(fileName) // Extract file extension
-	encKey := os.Args[2] // master key - the 2nd CLI argument
+	encKey := os.Args[2]                // master key - the 2nd CLI argument
+	fmt.Println("Enter key again: ")
+	var encKey2 string
+	fmt.Scanln(&encKey2)
+	if encKey != encKey2 {
+		fmt.Println("Error: Keys did not match.")
+		os.Exit(1)
+	}
 	content, err := ioutil.ReadFile(fileName) // content is a []byte object
 	handleError(err)
 	if extension == ".txt" { // Encrypt if txt
